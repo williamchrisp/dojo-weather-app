@@ -10,5 +10,5 @@ services:
     working_dir: /opt/app
     env_file: .env
   app:
-    build: ./application/
+    build: ./application
     image: weather-app:1

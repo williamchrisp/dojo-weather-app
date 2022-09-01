@@ -1,3 +1,4 @@
+# Container Repository for the image.
 resource "aws_ecr_repository" "ecr" {
     name = var.ecr_name
     force_delete = true
