@@ -51,8 +51,8 @@ jobs:
       REPO_NAME: ${{ secrets.REPO_NAME }}
     steps:
     - uses: actions/checkout@v2
-    - name: Image_Push
-      run: make push_image
+    - name: Push_App
+      run: make push_app
 
 
 
