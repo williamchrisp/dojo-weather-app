@@ -10,6 +10,7 @@ on:
       - '*dockerfile'
       - 'modules/**'
       - '**.tf'
+      - 'application/*'
 jobs:
   terraform_plan:
     runs-on: ubuntu-latest
@@ -37,7 +38,20 @@ jobs:
       run: make run_plan
     - name: Terraform_Apply
       run: make run_apply  
-
+  
+  push:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }}
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      REPO_NAME: ${{ secrets.REPO_NAME }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Image_Push
+      run: make push_image
 
 
 
