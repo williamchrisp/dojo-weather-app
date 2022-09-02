@@ -1,6 +1,6 @@
 # Container Repository for the image.
 resource "aws_ecr_repository" "ecr" {
-    name = var.ecr_name
+    name = "${var.tags.Owner}-${var.tags.Project}"
     force_delete = true
     image_scanning_configuration {
         scan_on_push = true

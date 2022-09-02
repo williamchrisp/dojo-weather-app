@@ -1,6 +1,5 @@
 module "ecs" {
-  source   = "./modules/ecs"
-  ecr_name = var.ecr_name
+  source = "./modules/ecs"
 
   tags = var.tags
 }
