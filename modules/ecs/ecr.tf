@@ -8,3 +8,8 @@ resource "aws_ecr_repository" "ecr" {
 
     tags = var.tags
 }
+
+output "ecr_name" {
+  description = "ECR Name"
+  value = aws_ecr_repository.ecr.name
+}
