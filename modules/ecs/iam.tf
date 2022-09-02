@@ -1,6 +1,6 @@
 # Roles to allow ECS access to ECR
 resource "aws_iam_role" "ecs-ecr-access" {
-  name = "${var.tags.Owner}EcsExecutionRole"
+  name = "${var.tags.Owner}-${var.tags.Project}-EcsExecutionRole"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -23,7 +23,7 @@ resource "aws_iam_role" "ecs-ecr-access" {
 
 # Policy for ECR Access
 resource "aws_iam_role_policy" "ecr" {
-  name = "${var.tags.Owner}EcsEcrAccess"
+  name = "${var.tags.Owner}-${var.tags.Project}-EcsEcrAccess"
   role = aws_iam_role.ecs-ecr-access.id
 
   # Terraform's "jsonencode" function converts a
