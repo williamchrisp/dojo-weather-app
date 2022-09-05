@@ -18,3 +18,8 @@ output "ecr_name" {
   description = "ECR Name"
   value       = module.ecs.ecr_name
 }
+
+output "alb_url" {
+  description = "ALB URL"
+  value       = module.ecs.alb_url
+}
