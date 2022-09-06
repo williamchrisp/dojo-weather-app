@@ -1,5 +1,5 @@
 # Roles to allow ECS access to ECR
-resource "aws_iam_role" "ecs-ecr-access" {
+resource "aws_iam_role" "ecs_ecr_access" {
   name = "${var.tags.Owner}-${var.tags.Project}-EcsExecutionRole"
 
   # Terraform's "jsonencode" function converts a
@@ -12,7 +12,7 @@ resource "aws_iam_role" "ecs-ecr-access" {
         Effect = "Allow"
         Sid    = ""
         Principal = {
-          Service = "ecs.amazonaws.com"
+          Service = "ecs-tasks.amazonaws.com"
         }
       },
     ]
@@ -24,7 +24,7 @@ resource "aws_iam_role" "ecs-ecr-access" {
 # Policy for ECR Access
 resource "aws_iam_role_policy" "ecr" {
   name = "${var.tags.Owner}-${var.tags.Project}-EcsEcrAccess"
-  role = aws_iam_role.ecs-ecr-access.id
+  role = aws_iam_role.ecs_ecr_access.id
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -34,10 +34,12 @@ resource "aws_iam_role_policy" "ecr" {
         {
             Effect = "Allow",
             Action = [
+                "ecr:GetAuthorizationToken",
                 "ecr:BatchCheckLayerAvailability",
-                "ecr:BatchGetImage",
                 "ecr:GetDownloadUrlForLayer",
-                "ecr:GetAuthorizationToken"
+                "ecr:BatchGetImage",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
             ],
             Resource = "*"
         },

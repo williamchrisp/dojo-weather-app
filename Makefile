@@ -54,10 +54,10 @@ build:
 	$(COMPOSE_BUILD_APP)
 
 tag:
-	docker tag weather-app:1 $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_NAME):1
+	docker tag weather-app:latest $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_NAME):latest
 
 push:
-	docker push $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_NAME):1
+	docker push $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_NAME):latest
 
 run:
 	$(COMPOSE_RUN_APP)
