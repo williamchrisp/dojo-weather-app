@@ -24,7 +24,7 @@ run_destroy_apply: init destroy_apply
 .PHONY: run_app push_app
 run_app: build run
 
-push_app: build tag aws_login push
+push_app: build init tag aws_login push
 
 # Individual Terraform Commands
 .PHONY: version init plan apply destroy_plan destroy_apply
@@ -50,7 +50,7 @@ destroy_apply:
 
 # Individual Docker Commands
 .PHONY: build tag push run clean
-build:
+build: 
 	$(COMPOSE_BUILD_APP)
 
 tag:
