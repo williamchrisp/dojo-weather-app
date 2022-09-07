@@ -8,7 +8,7 @@ on:
       - 'application/**'
       - '.github/workflows/push.yml'
   workflow_run:
-    workflow: [Deploy]
+    workflows: [Deploy]
     branches:
     - Main
     types:
