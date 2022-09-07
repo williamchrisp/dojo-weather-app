@@ -3,6 +3,10 @@ variable "availability_zones" {
   default = []
 }
 
+variable "image_tag" {
+  default = ""
+}
+
 variable "tags" {
   default     = {}
 }

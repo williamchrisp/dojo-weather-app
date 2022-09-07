@@ -5,6 +5,7 @@ data "aws_region" "current" {}
 module "ecs" {
   source             = "./modules/ecs"
   availability_zones = var.availability_zones
+  image_tag          = var.image_tag
 
   tags = var.tags
 }
