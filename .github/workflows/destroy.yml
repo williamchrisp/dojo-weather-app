@@ -3,14 +3,6 @@ on:
   push:
     branches:
       - destroy
-    paths:
-      - 'docker-compose.yml'
-      - 'Makefile'
-      - '.github/workflows/**'
-      - '*dockerfile'
-      - 'modules/**'
-      - '**.tf'
-      - 'application/**'
 jobs:
   terraform_destroy_plan:
     runs-on: ubuntu-latest
