@@ -1,6 +1,7 @@
-# Variables for multiple targets
+# Variables 
 export ECR_NAME = $$($(COMPOSE_RUN_TERRAFORM) output -raw ecr_name)
 export AWS_REGION = $$($(COMPOSE_RUN_TERRAFORM) output -raw region_name)
+IMAGE_TAG ?= latest
 
 # Compose and Docker Commands
 COMPOSE_RUN_TERRAFORM = docker-compose run --rm tf
@@ -54,10 +55,10 @@ build:
 	$(COMPOSE_BUILD_APP)
 
 tag:
-	docker tag weather-app:latest $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_NAME):latest
+	docker tag weather-app:latest $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_NAME):$(IMAGE_TAG)
 
 push:
-	docker push $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_NAME):latest
+	docker push $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_NAME):$(IMAGE_TAG)
 
 run:
 	$(COMPOSE_RUN_APP)
