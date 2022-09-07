@@ -22,10 +22,10 @@ run_destroy_plan: init destroy_plan
 run_destroy_apply: init destroy_apply
 
 # Docker Pipeline and Local Commands
-.PHONY: run_app push_app
+.PHONY: run_app push_image
 run_app: build run
 
-push_app: build init tag aws_login push
+push_image: build init tag aws_login push
 
 # Individual Terraform Commands
 .PHONY: version init plan apply destroy_plan destroy_apply

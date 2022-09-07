@@ -1,4 +1,4 @@
-name: Push
+name: Push Image
 on:
   push:
     branches:
@@ -6,6 +6,7 @@ on:
     paths:
       - 'docker-compose.yml'
       - 'application/**'
+      - 'Makefile'
   workflow_run:
     workflows: [Deploy]
     branches:
@@ -13,7 +14,7 @@ on:
     types:
     - completed
 jobs:
-  push:
+  push_image:
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -22,5 +23,5 @@ jobs:
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
     steps:
     - uses: actions/checkout@v2
-    - name: Push_App
-      run: make push_app
+    - name: Push_Image
+      run: make push_image
