@@ -11,5 +11,5 @@ services:
     env_file: .env
   app:
     build: ./application
-    image: weather-app:latest
+    image: app:latest
     platform: linux/amd64
