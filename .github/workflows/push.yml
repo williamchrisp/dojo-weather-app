@@ -10,7 +10,7 @@ on:
   workflow_run:
     workflows: [Deploy]
     branches:
-    - Main
+    - main
     types:
     - completed
 jobs:
