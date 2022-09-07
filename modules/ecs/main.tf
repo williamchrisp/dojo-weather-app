@@ -6,21 +6,15 @@ data "aws_ssm_parameter" "vpc_id" {
 # Grab current Region
 data "aws_region" "current" {}
 
-# Pull data on the Main Infra Public/Private subnets.
-data "aws_subnets" "public" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_ssm_parameter.vpc_id.value]
-  }
-  tags = {
-    Tier = "public"
-  }
-}
-
+# Pull data on the Main Infra Private subnets.
 data "aws_subnets" "private" {
   filter {
     name   = "vpc-id"
     values = [data.aws_ssm_parameter.vpc_id.value]
+  }
+  filter {
+    name = "availability-zone"
+    values = var.availability_zones
   }
   tags = {
     Tier = "private"
@@ -63,7 +57,7 @@ resource "aws_ecs_service" "app" {
   }
 
   network_configuration {
-    subnets = [data.aws_subnets.private.ids[0], data.aws_subnets.private.ids[1]]
+    subnets = data.aws_subnets.private.ids
     security_groups = [aws_security_group.ecs_sg.id]
     assign_public_ip = false
   }

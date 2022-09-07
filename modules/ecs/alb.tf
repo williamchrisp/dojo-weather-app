@@ -1,3 +1,18 @@
+# Pull data on the Main Infra Private subnets.
+data "aws_subnets" "public" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_ssm_parameter.vpc_id.value]
+  }
+  filter {
+    name = "availability-zone"
+    values = var.availability_zones
+  }
+  tags = {
+    Tier = "public"
+  }
+}
+
 # IP Target group for ECS
 resource "aws_lb_target_group" "tg" {
   name        = "${var.tags.Project}-tg"
@@ -15,7 +30,7 @@ resource "aws_lb" "alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
-  subnets            = [data.aws_subnets.public.ids[0], data.aws_subnets.public.ids[1]]
+  subnets            = data.aws_subnets.public.ids
 
   tags = var.tags
 }

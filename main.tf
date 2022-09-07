@@ -3,7 +3,8 @@ data "aws_region" "current" {}
 
 # Import my ecs module
 module "ecs" {
-  source = "./modules/ecs"
+  source             = "./modules/ecs"
+  availability_zones = var.availability_zones
 
   tags = var.tags
 }
