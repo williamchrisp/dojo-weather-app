@@ -1,0 +1,22 @@
+name: Push
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docker-compose.yml'
+      - 'application/**'
+      - '.github/workflows/push.yml'
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    needs: terraform_apply
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }}
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Push_App
+      run: make push_app

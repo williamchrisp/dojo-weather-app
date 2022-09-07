@@ -10,7 +10,7 @@ on:
       - '*dockerfile'
       - 'modules/**'
       - '**.tf'
-
+      - 'application/**'
 jobs:
   terraform_destroy_plan:
     runs-on: ubuntu-latest
