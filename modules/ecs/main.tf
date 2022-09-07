@@ -6,7 +6,7 @@ data "aws_ssm_parameter" "vpc_id" {
 # Grab current Region
 data "aws_region" "current" {}
 
-# Pull data on the Main Infra Private subnets.
+# Pull data on the Main Infra Private subnets, using only the specified AZs.
 data "aws_subnets" "private" {
   filter {
     name   = "vpc-id"
@@ -45,15 +45,17 @@ resource "aws_ecs_service" "app" {
   name            = "${var.tags.Owner}-${var.tags.Project}"
   cluster         = aws_ecs_cluster.cluster.id
   task_definition = aws_ecs_task_definition.app.arn
-  desired_count   = 1
+  desired_count   = var.desired_count
+  deployment_maximum_percent = var.deployment_max
+  deployment_minimum_healthy_percent = var.deployment_min
   launch_type     = "FARGATE"
-  health_check_grace_period_seconds = 60
+  health_check_grace_period_seconds = var.health_check_delay
   depends_on      = [aws_iam_role.ecs_ecr_access]
 
   load_balancer {
     target_group_arn = aws_lb_target_group.tg.arn
     container_name   = "${var.tags.Project}"
-    container_port   = 3000
+    container_port   = var.container_port
   }
 
   network_configuration {
@@ -74,8 +76,8 @@ resource "aws_ecs_task_definition" "app" {
   family = "${var.tags.Owner}-${var.tags.Project}-fam"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
-  cpu = 256
-  memory = 512
+  cpu = var.cpu
+  memory = var.memory
   execution_role_arn = "${aws_iam_role.ecs_ecr_access.arn}"
   container_definitions = jsonencode([
     {
@@ -83,7 +85,7 @@ resource "aws_ecs_task_definition" "app" {
       image = "${aws_ecr_repository.ecr.repository_url}:${var.image_tag}"
       portMappings = [
         {
-          containerPort = 3000
+          containerPort = var.container_port
           protocol = "tcp"
         }]
       logConfiguration = {

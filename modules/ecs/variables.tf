@@ -1,12 +1,20 @@
-# Availability zones you want the app deployed too. Must subnets must be available in infra.
-variable "availability_zones" {
-  default = []
-}
+# Root variables passed in
+variable "availability_zones" {}
 
-variable "image_tag" {
-  default = ""
-}
+variable "image_tag" {}
 
-variable "tags" {
-  default     = {}
-}
+variable "desired_count" {}
+
+variable "deployment_max" {}
+
+variable "deployment_min" {}
+
+variable "tags" {}
+
+variable "container_port" {}
+
+variable "health_check_delay" {}
+
+variable "cpu" {}
+
+variable "memory" {}

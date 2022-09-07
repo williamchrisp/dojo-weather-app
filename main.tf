@@ -6,6 +6,13 @@ module "ecs" {
   source             = "./modules/ecs"
   availability_zones = var.availability_zones
   image_tag          = var.image_tag
+  desired_count      = var.desired_count
+  deployment_max     = var.deployment_max
+  deployment_min     = var.deployment_min
+  container_port     = var.container_port
+  health_check_delay = var.health_check_delay
+  cpu                = var.cpu
+  memory             = var.memory
 
   tags = var.tags
 }
