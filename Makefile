@@ -30,7 +30,7 @@ run_app: build run
 
 push_image: build init tag aws_login push
 
-deploy_image: init update
+deploy_image: init update_task
 
 # Individual Terraform Commands
 .PHONY: version init plan apply destroy_plan destroy_apply

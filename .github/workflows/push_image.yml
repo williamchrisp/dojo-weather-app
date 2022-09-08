@@ -25,7 +25,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Push_Image
       run: make push_image
-      
+
   deploy_image:
     environment:
       name: approval
@@ -38,4 +38,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Deploy_image
-      run: make update_task
+      run: make deploy_image
