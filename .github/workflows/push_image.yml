@@ -5,7 +5,6 @@ on:
       - main
     paths:
       - 'application/**'
-      - 'Makefile'
   workflow_run:
     workflows: [Deploy]
     branches:
@@ -17,6 +16,8 @@ on:
       - 'docker-compose.yml'
 jobs:
   push_image:
+    environment:
+      name: approval
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

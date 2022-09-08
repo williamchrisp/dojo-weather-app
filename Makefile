@@ -10,7 +10,7 @@ DOCKER_CLEAN = docker-compose down --remove-orphans && docker image prune && doc
 IMAGE_TAG ?= latest
 ECR_NAME = $(shell $(COMPOSE_RUN_TERRAFORM) output -raw ecr_name)
 AWS_REGION = $(shell $(COMPOSE_RUN_TERRAFORM) output -raw region_name)
-AWS_ACCOUNT_ID := $(shell $(COMPOSE_RUN_AWS) sts get-caller-identity --query Account --output text)
+AWS_ACCOUNT_ID = $(shell $(COMPOSE_RUN_AWS) sts get-caller-identity --query Account --output text)
 ECS_CLUSTER = $(shell $(COMPOSE_RUN_TERRAFORM) output -raw ecs_cluster)
 ECS_SERVICE = $(shell $(COMPOSE_RUN_TERRAFORM) output -raw ecs_service)
 
@@ -71,7 +71,7 @@ clean:
 
 # AWS and Variable Commands
 .PHONY: aws_login
-aws_login: version
+aws_login:
 	$(COMPOSE_RUN_AWS) ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 
 update_task:
