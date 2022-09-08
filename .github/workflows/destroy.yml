@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - destroy
+  workflow_dispatch:
 jobs:
   terraform_destroy_plan:
     runs-on: ubuntu-latest

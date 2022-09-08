@@ -25,10 +25,12 @@ run_destroy_plan: init destroy_plan
 run_destroy_apply: init destroy_apply
 
 # Docker Pipeline and Local Commands
-.PHONY: run_app push_image
+.PHONY: run_app push_image deploy_image
 run_app: build run
 
-push_image: build init tag aws_login push update_task
+push_image: build init tag aws_login push
+
+deploy_image: init update
 
 # Individual Terraform Commands
 .PHONY: version init plan apply destroy_plan destroy_apply
@@ -70,7 +72,7 @@ clean:
 	$(DOCKER_CLEAN)
 
 # AWS and Variable Commands
-.PHONY: aws_login
+.PHONY: aws_login update_task
 aws_login:
 	$(COMPOSE_RUN_AWS) ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 
