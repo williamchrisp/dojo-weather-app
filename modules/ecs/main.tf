@@ -30,7 +30,7 @@ resource "aws_cloudwatch_log_group" "app" {
 
 # ECS Cluster Creation
 resource "aws_ecs_cluster" "cluster" {
-  name = "${var.tags.Owner}-${var.tags.Project}-ecs"
+  name = "${var.tags.Owner}-${var.tags.Project}"
 
   setting {
     name  = "containerInsights"
@@ -42,7 +42,7 @@ resource "aws_ecs_cluster" "cluster" {
 
 # ECS Service definitions
 resource "aws_ecs_service" "app" {
-  name            = "${var.tags.Owner}-${var.tags.Project}"
+  name            = "${var.tags.Owner}-${var.tags.Project}-service"
   cluster         = aws_ecs_cluster.cluster.id
   task_definition = aws_ecs_task_definition.app.arn
   desired_count   = var.desired_count
@@ -100,4 +100,14 @@ resource "aws_ecs_task_definition" "app" {
   ])
 
   tags = var.tags
+}
+
+output "ecs_cluster" {
+  description = "ECS Cluster Name"
+  value = aws_ecs_cluster.cluster.name
+}
+
+output "ecs_service" {
+  description = "ECS Service Name"
+  value = aws_ecs_service.app.name
 }

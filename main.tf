@@ -36,6 +36,16 @@ output "ecr_name" {
   value       = module.ecr.ecr_name
 }
 
+output "ecs_cluster" {
+  description = "ECS Cluster Name"
+  value       = module.ecs.ecs_cluster
+}
+
+output "ecs_service" {
+  description = "ECS Service Name"
+  value       = module.ecs.ecs_service
+}
+
 output "alb_url" {
   description = "ALB URL"
   value       = module.ecs.alb_url
