@@ -18,3 +18,5 @@ variable "health_check_delay" {}
 variable "cpu" {}
 
 variable "memory" {}
+
+variable "ecr_url" {}

@@ -5,6 +5,7 @@ data "aws_region" "current" {}
 module "ecs" {
   source             = "./modules/ecs"
   availability_zones = var.availability_zones
+  ecr_url            = module.ecr.ecr_url
   image_tag          = var.image_tag
   desired_count      = var.desired_count
   deployment_max     = var.deployment_max
@@ -17,6 +18,13 @@ module "ecs" {
   tags = var.tags
 }
 
+# Import my ecr module
+module "ecr" {
+  source = "./modules/ecr"
+
+  tags = var.tags
+}
+
 # Output data used for pushing image
 output "region_name" {
   description = "Current AWS Region"
@@ -25,7 +33,7 @@ output "region_name" {
 
 output "ecr_name" {
   description = "ECR Name"
-  value       = module.ecs.ecr_name
+  value       = module.ecr.ecr_name
 }
 
 output "alb_url" {

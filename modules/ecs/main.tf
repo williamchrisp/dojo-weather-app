@@ -82,7 +82,7 @@ resource "aws_ecs_task_definition" "app" {
   container_definitions = jsonencode([
     {
       name =  "${var.tags.Project}"
-      image = "${aws_ecr_repository.ecr.repository_url}:${var.image_tag}"
+      image = "${var.ecr_url}:${var.image_tag}"
       portMappings = [
         {
           containerPort = var.container_port

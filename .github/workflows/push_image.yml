@@ -10,9 +10,11 @@ on:
   workflow_run:
     workflows: [Deploy]
     branches:
-    - main
+      - main
     types:
-    - completed
+      - completed
+    paths:
+      - 'modules/ecr/**'
 jobs:
   push_image:
     runs-on: ubuntu-latest
