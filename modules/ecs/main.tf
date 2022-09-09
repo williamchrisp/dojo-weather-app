@@ -1,8 +1,3 @@
-# Pull VPC ID located in SSM Parameter Store from Main Infra Stack
-data "aws_ssm_parameter" "vpc_id" {
-  name = "/${var.tags.Owner}/${var.tags.Project}/vpc-id"
-}
-
 # Grab current Region
 data "aws_region" "current" {}
 
@@ -10,7 +5,7 @@ data "aws_region" "current" {}
 data "aws_subnets" "private" {
   filter {
     name   = "vpc-id"
-    values = [data.aws_ssm_parameter.vpc_id.value]
+    values = [var.vpc_id]
   }
   filter {
     name = "availability-zone"

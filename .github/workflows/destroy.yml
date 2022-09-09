@@ -4,8 +4,6 @@ on:
     branches:
       - destroy
   workflow_dispatch:
-  repository_dispatch:
-    types: [destroy]
 jobs:
   terraform_destroy_plan:
     runs-on: ubuntu-latest

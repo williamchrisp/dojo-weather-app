@@ -2,7 +2,7 @@
 data "aws_subnets" "public" {
   filter {
     name   = "vpc-id"
-    values = [data.aws_ssm_parameter.vpc_id.value]
+    values = [var.vpc_id]
   }
   filter {
     name = "availability-zone"
@@ -19,7 +19,7 @@ resource "aws_lb_target_group" "tg" {
   port        = 3000
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = data.aws_ssm_parameter.vpc_id.value
+  vpc_id      = var.vpc_id
 
   tags = var.tags
 }

@@ -1,4 +1,6 @@
 # Root variables passed in
+variable "vpc_id" {}
+
 variable "availability_zones" {}
 
 variable "image_tag" {}

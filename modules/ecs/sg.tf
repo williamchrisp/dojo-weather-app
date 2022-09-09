@@ -1,7 +1,7 @@
 resource "aws_security_group" "alb_sg" {
   name        = "${var.tags.Owner}-${var.tags.Project}-alb-sg"
   description = "Allow HTTP traffic to ALB"
-  vpc_id      = data.aws_ssm_parameter.vpc_id.value
+  vpc_id      = var.vpc_id
 
   ingress {
     description      = "Internet Web Traffic"
@@ -25,7 +25,7 @@ resource "aws_security_group" "alb_sg" {
 resource "aws_security_group" "ecs_sg" {
   name        = "${var.tags.Owner}-${var.tags.Project}-ecs-sg"
   description = "Allow HTTP traffic to ECS"
-  vpc_id      = data.aws_ssm_parameter.vpc_id.value
+  vpc_id      = var.vpc_id
 
   ingress {
     description      = "Internet Web Traffic"
