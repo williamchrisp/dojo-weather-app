@@ -5,17 +5,29 @@ on:
       - main
     paths:
       - 'application/**'
-  workflow_run:
-    workflows: [Deploy]
-    branches:
-      - main
-    types:
-      - completed
-    paths:
       - 'modules/ecr/**'
       - 'docker-compose.yml'
 jobs:
+  ecr_check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with: 
+        filters: |
+          tf:
+            - 'modules/ecr/**'
+            - 'docker-compose.yml'
+    - name: Wait for TF Deployment
+      if: steps.filter.outputs.tf == 'true'
+      uses: fountainhead/action-wait-for-check@v1.0.0
+      with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          checkName: deploy
+
   push_image:
+    needs: ecr_check
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
