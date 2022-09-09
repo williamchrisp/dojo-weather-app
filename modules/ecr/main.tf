@@ -10,7 +10,7 @@ resource "aws_ecr_repository" "ecr" {
 }
 
 output "ecr_name" {
-  description = "ECR Name fds"
+  description = "ECR Name"
   value = aws_ecr_repository.ecr.name
 }
 
