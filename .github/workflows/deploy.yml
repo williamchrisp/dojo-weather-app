@@ -6,6 +6,8 @@ on:
     paths:
       - 'modules/**'
       - '**.tf'
+  repository_dispatch:
+    types: [deploy]
 jobs:
   terraform_plan:
     runs-on: ubuntu-latest
