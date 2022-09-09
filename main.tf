@@ -44,7 +44,7 @@ output "region_name" {
 }
 
 output "ecr_name" {
-  description = "ECR Name"
+  description = "Container repository name"
   value       = module.ecr.ecr_name
 }
 
@@ -59,6 +59,6 @@ output "ecs_service" {
 }
 
 output "alb_url" {
-  description = "ALB URL"
+  description = "Application Load Balancer URL"
   value       = module.ecs.alb_url
 }
