@@ -24,7 +24,7 @@ jobs:
       uses: fountainhead/action-wait-for-check@v1.0.0
       with:
           token: ${{ secrets.ACCESS_TOKEN }}
-          checkName: deploy
+          checkName: terraform_apply
           timeoutSeconds: 1800
 
   push_image:
