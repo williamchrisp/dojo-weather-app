@@ -1,4 +1,4 @@
-name: Push Image
+name: push image
 on:
   push:
     branches:
@@ -25,6 +25,7 @@ jobs:
       with:
           token: ${{ secrets.ACCESS_TOKEN }}
           checkName: deploy
+          timeoutSeconds: 1800
 
   push_image:
     needs: ecr_check
