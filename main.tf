@@ -3,12 +3,7 @@ data "aws_region" "current" {}
 
 # Import my main infra module
 module "vpc" {
-  source                    = "github.com/williamchrisp/dojo-weather-infra?ref=master"
-  vpc_cidr                  = var.vpc_cidr
-  subnet_availability_zones = var.subnet_availability_zones
-  private_subnets           = var.private_subnets
-  public_subnets            = var.public_subnets
-  bucket                    = var.bucket
+  source = "github.com/williamchrisp/dojo-weather-infra?ref=master"
 
   tags = var.tags
 }
@@ -62,4 +57,24 @@ output "ecs_service" {
 output "alb_url" {
   description = "Application Load Balancer URL"
   value       = module.ecs.alb_url
+}
+
+output "vpc_id" {
+  description = "The VPC ID in which the app is built under"
+  value       = module.vpc.vpc_id
+}
+
+output "subnet_availability_zones" {
+  description = "Availability Zones in which each subnet will lie. Order specifies subnet."
+  value       = module.vpc.subnet_availability_zones
+}
+
+output "public_subnets" {
+  description = "Specifies the public subnets in a list. Order specifies AZ"
+  value       = module.vpc.public_subnets
+}
+
+output "private_subnets" {
+  description = "Specifies the private subnets in a list. Order specifies AZ"
+  value       = module.vpc.private_subnets
 }

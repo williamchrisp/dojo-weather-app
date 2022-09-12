@@ -171,6 +171,10 @@ The following Inputs are located in the variables.tf file under the root folder.
 | ecs_cluster | ECS Cluster Name |
 | ecs_service | ECS Service Name |
 | alb_url | Application Load Balancer URL |
+| vpc_id | VPC id required for applications using this module |
+| subnet_availability_zones | Availability Zones in which each subnet will lie. Order specifies subnet. |
+| public_subnets | Specifies the public subnets in a list. Order specifies AZ |
+| private_subnets | Specifies the private subnets in a list. Order specifies AZ |
 
 </details>
 
