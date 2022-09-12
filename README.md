@@ -140,10 +140,11 @@ The following Inputs are located in the variables.tf file under the root folder.
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | vpc_cidr | Specifies the cidr for the vpc | string | `"10.0.0.0/24"` | yes |
+| subnet_availability_zones | Availability Zones in which each subnet will lie. Order specifies subnet. | list(any) | `"us-east-1a", "us-east-1b", "us-east-1c"` | yes |
 | public_subnets | Specifies the public subnets in a list | list(any) | `"10.0.0.0/28", "10.0.0.16/28", "10.0.0.32/28"` | yes |
 | private_subnets | Specifies the private subnets in a list | list(any) | `"10.0.0.64/26", "10.0.0.128/26", "10.0.0.192/26"` | yes |
 | bucket | S3 bucket name - must be globally unique | string | `"williamdojoapp"` | yes |
-| avalability_zones | Availability zones you want the app deployed too. | map(string) | `["us-east-1a", "us-east-1b"]`| yes |
+| ecs_avalability_zones | Availability zones you want the app deployed too. | map(string) | `["us-east-1a", "us-east-1b"]`| yes |
 | image_tag | Sets the image tag you would like to use. | string | `latest` | yes |
 | desired_count | Number of instances of the task definition to place and keep running.| number | `1` | yes |
 | deployment_max | Upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. | number | `200` | yes |
