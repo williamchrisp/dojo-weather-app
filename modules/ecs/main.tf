@@ -9,7 +9,7 @@ data "aws_subnets" "private" {
   }
   filter {
     name = "availability-zone"
-    values = var.availability_zones
+    values = var.ecs_availability_zones
   }
   tags = {
     Tier = "private"

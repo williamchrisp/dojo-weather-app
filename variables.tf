@@ -6,6 +6,12 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/24"
 }
 
+variable "subnet_availability_zones" {
+  type        = list(any)
+  description = "Availability Zones in which each subnet will lie. Order specifies subnet."
+  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+}
+
 variable "public_subnets" {
   type        = list(any)
   description = "Specifies the public subnets in a list"
@@ -27,7 +33,7 @@ variable "bucket" {
 
 # APPLICATION LAYER VARIABLES
 # Availability zones you want the app deployed too. Must subnets must be available in infra.
-variable "availability_zones" {
+variable "ecs_availability_zones" {
   type        = list(any)
   description = "Availability zones you want the app deployed too."
   default     = ["us-east-1a", "us-east-1b"]
