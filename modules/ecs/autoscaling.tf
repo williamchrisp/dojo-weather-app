@@ -25,4 +25,3 @@ resource "aws_appautoscaling_policy" "ecs_policy_cpu" {
     scale_out_cooldown = 60
   }
 }
-

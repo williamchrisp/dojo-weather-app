@@ -1,17 +1,15 @@
-# Grab Output data used for pushing image
+# Grab data in the stack
 data "aws_region" "current" {}
 
-# Import my main infra module
-module "vpc" {
-  source = "github.com/williamchrisp/dojo-weather-infra?ref=master"
-
-  tags = var.tags
+# Pull VPC ID located in SSM Parameter Store from Main Infra Stack
+data "aws_ssm_parameter" "vpc_id" {
+  name = "/${var.tags.Owner}/${var.tags.Project}/vpc-id"
 }
 
 # Import my ecs module
 module "ecs" {
   source                 = "./modules/ecs"
-  vpc_id                 = module.vpc.vpc_id
+  vpc_id                 = data.aws_ssm_parameter.vpc_id.value
   ecs_availability_zones = var.ecs_availability_zones
   ecr_url                = module.ecr.ecr_url
   image_tag              = var.image_tag
@@ -57,24 +55,4 @@ output "ecs_service" {
 output "alb_url" {
   description = "Application Load Balancer URL"
   value       = module.ecs.alb_url
-}
-
-output "vpc_id" {
-  description = "The VPC ID in which the app is built under"
-  value       = module.vpc.vpc_id
-}
-
-output "subnet_availability_zones" {
-  description = "Availability Zones in which each subnet will lie. Order specifies subnet."
-  value       = module.vpc.subnet_availability_zones
-}
-
-output "public_subnets" {
-  description = "Specifies the public subnets in a list. Order specifies AZ"
-  value       = module.vpc.public_subnets
-}
-
-output "private_subnets" {
-  description = "Specifies the private subnets in a list. Order specifies AZ"
-  value       = module.vpc.private_subnets
 }
