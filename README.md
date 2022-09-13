@@ -68,10 +68,10 @@ The following workflows are provided in this repository. These are located under
 
 | Workflow | Description | Environments | Trigger
 |----------|-------------|--------------|--------|
-| build.yml | This workflow will build the app from scratch using the make commands `terraform_plan, terraform_apply, push_app.` | approval | [workflow_dispatch](https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow)  |
-| destroy.yml | This workflow will destroy the app using the make commands `terraform_destroy_plan, terraform_destroy_apply.`| approval | [workflow_dispatch](https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow) or merge with `destroy` branch|
-| deploy.yml | This workflow will update the app terraform stack using the make commands `terraform_plan, terraform_apply`| approval | on push |
-| push.yml | This workflow will update the app docker using the make commands `push_app, deploy_image`| approval | on push |
+| build.yml | This workflow will build the app from scratch using the make commands `terraform_plan, terraform_apply, push_image.` | approval | [workflow_dispatch](https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow) or [infra repository_dispatch](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#repository_dispatch)  |
+| destroy.yml | This workflow will destroy the app using the make commands `terraform_destroy_plan, terraform_destroy_apply.`| approval | [workflow_dispatch](https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow), [infra repository_dispatch](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#repository_dispatch) or merge with `destroy` branch|
+| deploy.yml | This workflow will update the app terraform stack using the make commands `terraform_plan, terraform_apply`| approval | on push or [infra repository_dispatch](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#repository_dispatch) |
+| push.yml | This workflow will update the app docker using the make commands `push_image, deploy_image`| approval | on push |
 
 
 Note: Pushing to `master` branch will trigger workflow dependent on paths.
