@@ -113,10 +113,12 @@ Pushing to master is not permitted and the current workflow is to create a branc
 
 ## GitHub Secrets
 The following github secrets are required
+```
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 AWS_SESSION_TOKEN
 ACCESS_TOKEN
+```
 The Access token is required for action to track the status of other actions. You can follow this to create your own.
 https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 
