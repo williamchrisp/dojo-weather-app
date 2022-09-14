@@ -51,7 +51,7 @@ make run_app
 
 Pushing the app to ECR specified in the terraform file. `Requires the terraform stack to be deployed (make run_plan and make run_apply)`
 ```
-make push_app
+make push_image
 ```
 
 Deploying the new image to the ECR task. Other words, making it live! `Requires the terraform stack to be deployed (make run_plan and make run_apply)`
@@ -202,7 +202,7 @@ Link: https://github.com/phattp/nodejs-weather-app
 This repository is contain code of my weather forecast application that you can predict the weather from a location.
 This project is the part of [The Complete Node.js Developer Course](https://www.udemy.com/the-complete-nodejs-developer-course-2/) by Andrew Mead on Udemy.
 
-Visit [Live Site](https://phatt-weather-app.herokuapp.com/)
+It is located in the /application/ folder of this repository.
 
 ### Installing
 
