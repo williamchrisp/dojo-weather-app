@@ -16,6 +16,8 @@ module "ecs" {
   desired_count          = var.desired_count
   deployment_max         = var.deployment_max
   deployment_min         = var.deployment_min
+  autoscaling_max        = var.autoscaling_max
+  autoscaling_min        = var.autoscaling_min
   container_port         = var.container_port
   health_check_delay     = var.health_check_delay
   cpu                    = var.cpu

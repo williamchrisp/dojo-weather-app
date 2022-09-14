@@ -11,6 +11,10 @@ variable "deployment_max" {}
 
 variable "deployment_min" {}
 
+variable "autoscaling_max" {}
+
+variable "autoscaling_min" {}
+
 variable "tags" {}
 
 variable "container_port" {}

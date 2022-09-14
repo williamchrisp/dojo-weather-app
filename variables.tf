@@ -17,7 +17,7 @@ variable "image_tag" {
 variable "desired_count" {
   type        = number
   description = "Number of instances of the task definition to place and keep running."
-  default     = 1
+  default     = 2
 }
 
 variable "deployment_max" {
@@ -30,6 +30,18 @@ variable "deployment_min" {
   type        = number
   description = "Lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment."
   default     = 100
+}
+
+variable "autoscaling_max" {
+  type        = number
+  description = "Max capacity of the scalable target"
+  default     = 4
+}
+
+variable "autoscaling_min" {
+  type        = number
+  description = "Min capacity of the scalable target"
+  default     = 2
 }
 
 variable "container_port" {
