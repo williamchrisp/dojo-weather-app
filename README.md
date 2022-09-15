@@ -147,6 +147,8 @@ The following Inputs are located in the variables.tf file under the root folder.
 | desired_count | Number of instances of the task definition to place and keep running.| number | `1` | yes |
 | deployment_max | Upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. | number | `200` | yes |
 | deployment_min | Lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment. | number | `100` | yes |
+| autoscaling_max | Max capacity of the scalable target | number | `4` | yes |
+| autoscaling_min | Min capacity of the scalable target | number | `2` | yes |
 | container_port | The exposed port on the container. | number |`3000` | yes |
 | health_check_delay | Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown. | number | `60` | yes |
 | cpu | The required CPU units for the container | number | `256` | yes |
